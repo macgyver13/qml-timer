@@ -70,23 +70,21 @@ Rectangle {
       spacing: 10
       Layout.minimumWidth: root.width
       Layout.minimumHeight: root.height
-      Layout.topMargin: 20
 
       RowLayout {
+        Layout.topMargin: 20
         Layout.leftMargin: 10
         Text {
           text: "Work:"
           color: "white"
-          font.family: "Helvetica"
-          font.pixelSize: 40
+          font.family: "Helvetica"; font.pixelSize: 40
         }
 
         TextInput {
           id: workSeconds
           text: "45"
           color: "white"
-          font.family: "Helvetica"
-          font.bold: true; font.pixelSize: 40
+          font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
         }
       }
 
@@ -95,26 +93,24 @@ Rectangle {
         Text {
           text: "Rest:"
           color: "white"
-          font.family: "Helvetica"
-          font.pixelSize: 40
+          font.family: "Helvetica"; font.pixelSize: 40
         }
 
         TextInput {
           id: restSeconds
           text: "30"
           color: "white"
-          font.family: "Helvetica"
-          font.bold: true; font.pixelSize: 40
+          font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
         }
       }
 
       RowLayout {
         Layout.minimumWidth: root.width
-        Button {
+        RoundButton {
           Layout.alignment:Qt.AlignCenter
           text: clockview.timer.running ? "Pause" : "Resume"
-          font.family: "Helvetica"
-          font.bold: true; font.pixelSize: 20
+          width: 80
+          font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
 
           onClicked: {
             if (clockview.timer.running)
@@ -127,8 +123,8 @@ Rectangle {
         RoundButton {
           Layout.alignment:Qt.AlignCenter
           text: clockview.timer.running ? "Stop" : "Start"
-          font.family: "Helvetica"          
-          font.bold: true; font.pixelSize: 20
+          width: 80
+          font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
 
           onClicked: {
             initializeClock();

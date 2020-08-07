@@ -138,16 +138,14 @@ Item {
       Text {
         text: "Remaining:"
         color: "white"
-        font.family: "Helvetica"
-        font.pixelSize: 40
+        font.family: "Helvetica"; font.pixelSize: 40
       }
 
       Text {
         id: secondsLabel
         text: seconds
         color: "white"
-        font.family: "Helvetica"
-        font.bold: true; font.pixelSize: 40
+        font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
         style: Text.Raised; styleColor: "black"
       }
     }
@@ -157,16 +155,14 @@ Item {
       Text {
         text: "Activity:"
         color: "white"
-        font.family: "Helvetica"
-        font.pixelSize: 40
+        font.family: "Helvetica"; font.pixelSize: 40
       }
 
       Text {
         id: modeLabel
         text: mode
         color: "white"
-        font.family: "Helvetica"
-        font.bold: true; font.pixelSize: 40
+        font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
         style: Text.Raised; styleColor: "black"
       }
     }
@@ -176,16 +172,14 @@ Item {
       Text {
         text: "Sets:"
         color: "white"
-        font.family: "Helvetica"
-        font.pixelSize: 40
+        font.family: "Helvetica"; font.pixelSize: 40
       }
 
       Text {
         id: setLabel
         text: sets
         color: "white"
-        font.family: "Helvetica"
-        font.bold: true; font.pixelSize: 40
+        font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
         style: Text.Raised; styleColor: "black"
       }
     }
