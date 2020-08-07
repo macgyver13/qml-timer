@@ -56,13 +56,13 @@
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QCoreApplication::setOrganizationName("QtExamples");
+    QCoreApplication::setOrganizationName("GilsonTech");
 
     QGuiApplication app(argc, argv);
 
     QQuickView view;
     view.connect(view.engine(), &QQmlEngine::quit, &app, &QCoreApplication::quit);
-    view.setSource(QUrl("qrc:/demos/clocks/clocks.qml"));
+    view.setSource(QUrl("qrc:/clock.qml"));
     if (view.status() == QQuickView::Error)
         return -1;
     view.setResizeMode(QQuickView::SizeRootObjectToView);

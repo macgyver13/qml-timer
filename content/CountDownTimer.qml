@@ -54,10 +54,8 @@ import QtQuick.Layouts 1.15
 
 Item {
   id : clock
-  width: 200
-
+  width: 300
   height: 240
-
 
   MediaPlayer {
     id: playDing
@@ -75,9 +73,11 @@ Item {
   property int sets: 0
   property string mode: "rest"
   property alias timer: countDownTimer
+  property alias dial: dial
 
   function timeChanged() {
     seconds = seconds - 1;
+    dial.update(seconds);
     if (seconds == 0) {
       playDing.play()
       if (mode === "work") {
@@ -88,12 +88,11 @@ Item {
         mode = "work"
         seconds = workSeconds
       }
+    } else if (seconds == 3) {
+      playShort.play()
     } else {
-//      if ( seconds % 10 == 0 && mode === "work" ) {
-//        playShort.play()
-//      }
       if ( mode === "work") {
-        if ( (workSeconds > 29 && Math.round(workSeconds * .5) == seconds) || seconds == 10 || seconds == 3 )
+        if ( (workSeconds > 29 && Math.round(workSeconds * .5) == seconds) || seconds == 10 )
           playShort.play()
       }
     }
@@ -105,83 +104,9 @@ Item {
     onTriggered: clock.timeChanged()
   }
 
-  ColumnLayout {
-    id: columnLayout
-    spacing: 10
-
-    Item {
-      Layout.alignment: Qt.AlignHCenter
-      width: 120; height: 200
-
-      Image { id: background; source: "clock.png"; }
-
-      Image {
-        x: 97.5; y: 20
-        source: "second.png"
-        transform: Rotation {
-          id: secondRotation
-          origin.x: 2.5; origin.y: 80;
-          angle: clock.seconds * 6
-          Behavior on angle {
-            SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
-          }
-        }
-      }
-
-      Image {
-        anchors.centerIn: background; source: "center.png"
-      }
-    }
-
-    RowLayout {
-      Layout.leftMargin: 10
-      Text {
-        text: "Remaining:"
-        color: "white"
-        font.family: "Helvetica"; font.pixelSize: 40
-      }
-
-      Text {
-        id: secondsLabel
-        text: seconds
-        color: "white"
-        font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
-        style: Text.Raised; styleColor: "black"
-      }
-    }
-
-    RowLayout {
-      Layout.leftMargin: 10
-      Text {
-        text: "Activity:"
-        color: "white"
-        font.family: "Helvetica"; font.pixelSize: 40
-      }
-
-      Text {
-        id: modeLabel
-        text: mode
-        color: "white"
-        font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
-        style: Text.Raised; styleColor: "black"
-      }
-    }
-
-    RowLayout {
-      Layout.leftMargin: 10
-      Text {
-        text: "Sets:"
-        color: "white"
-        font.family: "Helvetica"; font.pixelSize: 40
-      }
-
-      Text {
-        id: setLabel
-        text: sets
-        color: "white"
-        font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
-        style: Text.Raised; styleColor: "black"
-      }
-    }
+  Knob {
+    id: dial
+    height: 400
   }
+
 }

@@ -55,14 +55,14 @@ import "content" as Content
 
 Rectangle {
     id: root
-    width: 320; height: 640
-    color: clockview.mode == "work" ? "#05b508" : "#0523b5"
+    width: 400; height: 740
+    color: countDownTimer.mode == "work" ? "#05b508" : "#0523b5"
 
     function initializeClock() {
-      clockview.seconds = restSeconds.text;
-      clockview.workSeconds = workSeconds.text;
-      clockview.restSeconds = restSeconds.text;
-      clockview.sets = 0
+      countDownTimer.seconds = restSeconds.text;
+      countDownTimer.workSeconds = workSeconds.text;
+      countDownTimer.restSeconds = restSeconds.text;
+      countDownTimer.sets = 0
     }
 
     ColumnLayout {
@@ -106,38 +106,92 @@ Rectangle {
 
       RowLayout {
         Layout.minimumWidth: root.width
-        RoundButton {
+
+        Button {
           Layout.alignment:Qt.AlignCenter
-          text: clockview.timer.running ? "Pause" : "Resume"
-          width: 80
-          font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
+          contentItem: Text {
+            text: countDownTimer.timer.running ? "Pause" : "Resume"
+            color: "white"
+            font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+          }
+          background: Rectangle {
+            implicitHeight: 60
+            implicitWidth: 180
+            color: "grey"
+            radius: 10
+          }
 
           onClicked: {
-            if (clockview.timer.running)
-              clockview.timer.stop()
+            if (countDownTimer.timer.running)
+              countDownTimer.timer.stop()
             else
-              clockview.timer.start()
+              countDownTimer.timer.start()
           }
         }
 
-        RoundButton {
+        Button {
           Layout.alignment:Qt.AlignCenter
-          text: clockview.timer.running ? "Stop" : "Start"
-          width: 80
-          font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
+          contentItem: Text {
+            text: countDownTimer.timer.running ? "Stop" : "Start"
+            color: "white"
+            font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+          }
+          background: Rectangle {
+            implicitHeight: 60
+            implicitWidth: 180
+            color: "grey"
+            radius: 10
+          }
 
           onClicked: {
             initializeClock();
-            if (clockview.timer.running)
-              clockview.timer.stop()
+            if (countDownTimer.timer.running)
+              countDownTimer.timer.stop()
             else
-              clockview.timer.start()
+              countDownTimer.timer.start()
           }
         }
       }
 
-      Content.Clock {
-        id: clockview
+      Content.CountDownTimer {
+        id: countDownTimer
+        Layout.leftMargin: root.width/2 - countDownTimer.dial.height/2
+      }
+
+      RowLayout {
+        Layout.leftMargin: 10
+        Text {
+          text: "Activity:"
+          color: "white"
+          font.family: "Helvetica"; font.pixelSize: 40
+        }
+
+        Text {
+          text: countDownTimer.mode
+          color: "white"
+          font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
+          style: Text.Raised; styleColor: "black"
+        }
+      }
+
+      RowLayout {
+        Layout.leftMargin: 10
+        Text {
+          text: "Sets:"
+          color: "white"
+          font.family: "Helvetica"; font.pixelSize: 40
+        }
+
+        Text {
+          text: countDownTimer.sets
+          color: "white"
+          font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
+          style: Text.Raised; styleColor: "black"
+        }
       }
     }
 }

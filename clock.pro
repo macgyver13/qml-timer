@@ -10,5 +10,9 @@ INSTALLS    += target
 
 OTHER_FILES  += \
                 clocks.qml \
-                content/Clock.qml \
                 content/*.png
+
+DISTFILES += \
+  clock.qml \
+  content/CountDownTimer.qml \
+  content/Knob.qml
