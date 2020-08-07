@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/demos/clocks">
+        <file>clocks.qml</file>
+        <file>content/background.png</file>
+        <file>content/center.png</file>
+        <file>content/clock-night.png</file>
+        <file>content/clock.png</file>
+        <file>content/Clock.qml</file>
+        <file>content/second.png</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>audio/short.m4a</file>
+        <file>audio/ding.m4a</file>
+    </qresource>
+</RCC>
