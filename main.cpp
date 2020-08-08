@@ -58,6 +58,8 @@ int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setOrganizationName("GilsonTech");
+    QCoreApplication::setOrganizationDomain("gtech.net");
+    QCoreApplication::setApplicationName("Clock");
 
     QGuiApplication app(argc, argv);
 

@@ -17,7 +17,7 @@ iphoneos {
 }
 
 iphonesimulator {
-  QMAKE_POST_LINK += $$quote(cp $$PWD/clock.icns $$OUT_PWD/Debug-iphonesimulator/clock.app/;)
+  #QMAKE_POST_LINK += $$quote(cp $$PWD/clock.icns $$OUT_PWD/Debug-iphonesimulator/clock.app/;)
 }
 
 RESOURCES   += clocks.qrc

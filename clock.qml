@@ -52,6 +52,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import "content" as Content
+import Qt.labs.settings 1.0
 
 Rectangle {
   id: root
@@ -87,6 +88,10 @@ Rectangle {
         color: "white"
         font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
       }
+
+      Settings {
+        property alias workSeconds: workSeconds.text
+      }
     }
 
     RowLayout {
@@ -102,6 +107,9 @@ Rectangle {
         text: "30"
         color: "white"
         font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
+      }
+      Settings {
+        property alias restSeconds: restSeconds.text
       }
     }
 
