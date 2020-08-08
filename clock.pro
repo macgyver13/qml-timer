@@ -10,6 +10,13 @@ ios {
   OBJECTIVE_SOURCES += noSleep.mm
   LIBS += -framework UIKit
   QMAKE_INFO_PLIST = content/Info.plist
+}
+
+iphoneos {
+  QMAKE_POST_LINK += $$quote(cp $$PWD/clock.icns $$OUT_PWD/Debug-iphoneos/clock.app/;)
+}
+
+iphonesimulator {
   QMAKE_POST_LINK += $$quote(cp $$PWD/clock.icns $$OUT_PWD/Debug-iphonesimulator/clock.app/;)
 }
 
