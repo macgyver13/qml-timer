@@ -63,6 +63,7 @@ Rectangle {
     countDownTimer.workSeconds = workSeconds.text;
     countDownTimer.restSeconds = restSeconds.text;
     countDownTimer.sets = 0
+    countDownTimer.mode = "Rest"
   }
 
   ColumnLayout {
@@ -148,13 +149,11 @@ Rectangle {
         }
 
         onClicked: {
-          initializeClock();
-
           if (countDownTimer.timer.running) {
             countDownTimer.timer.stop()
           } else {
             countDownTimer.timer.start()
-            countDownTimer.mode = "Rest"
+            initializeClock();
           }
         }
       }
@@ -173,25 +172,25 @@ Rectangle {
         text: countDownTimer.sets
         color: "white"
         font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
-        style: Text.Raised; styleColor: "black"
       }
     }
 
     Content.CountDownTimer {
       id: countDownTimer
+      property int insetMargin: -60
       Layout.leftMargin: root.width/2 - countDownTimer.dial.height/2
-      Layout.topMargin: -60
+      Layout.topMargin: insetMargin
       implicitHeight: countDownTimer.dial.height
       implicitWidth: implicitHeight
 
       Text {
         anchors.top: countDownTimer.bottom
+        anchors.topMargin: countDownTimer.insetMargin
         anchors.horizontalCenter: parent.horizontalCenter
         text: countDownTimer.mode
         width: 100
         color: "white"
         font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
-        style: Text.Raised; styleColor: "black"
       }
     }
   }

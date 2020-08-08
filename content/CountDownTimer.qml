@@ -77,7 +77,13 @@ Item {
 
   function timeChanged() {
     seconds = seconds - 1;
-    dial.update(seconds);
+    var percentComplete = 0;
+    if (mode === "Work") {
+      percentComplete = seconds / workSeconds;
+    } else {
+      percentComplete = seconds / restSeconds;
+    }
+    dial.update(percentComplete,seconds);
     if (seconds == 0) {
       playDing.play()
       if (mode === "Work") {

@@ -14,8 +14,8 @@ Item {
 
     //value parameters
     property double from:0
-    property double value: 1
-    property double to: 100
+    property double value: 0
+    property double to: 1
 
     //progress from right to left
     property bool reverse: false
@@ -35,11 +35,11 @@ Item {
     property alias titleFontSize: labelTitle.font.pointSize
     property alias titleFontColor: labelTitle.color
 
-    function update(value) {
+    function update(value,seconds) {
         knob.value = value
         canvas.requestPaint()
         background.requestPaint()
-        label.text = value.toFixed(0);
+        label.text = seconds.toFixed(0);
     }
 
     Text {
@@ -100,7 +100,7 @@ Item {
             z: 1
             font.pointSize: knob.fontSize
             color: titleFontColor
-            text: knob.value.toFixed(0)
+            text: "0"
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             anchors.fill: parent
