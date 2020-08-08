@@ -71,7 +71,7 @@ Item {
   property int restSeconds: 60
   property int seconds: 60
   property int sets: 0
-  property string mode: "rest"
+  property string mode: "Rest"
   property alias timer: countDownTimer
   property alias dial: dial
 
@@ -80,18 +80,18 @@ Item {
     dial.update(seconds);
     if (seconds == 0) {
       playDing.play()
-      if (mode === "work") {
-        mode = "rest"
+      if (mode === "Work") {
+        mode = "Rest"
         seconds = restSeconds
         sets = sets + 1
       } else {
-        mode = "work"
+        mode = "Work"
         seconds = workSeconds
       }
     } else if (seconds == 3) {
       playShort.play()
     } else {
-      if ( mode === "work") {
+      if ( mode === "Work") {
         if ( (workSeconds > 29 && Math.round(workSeconds * .5) == seconds) || seconds == 10 )
           playShort.play()
       }

@@ -52,6 +52,7 @@
 #include <QQmlEngine>
 #include <QQmlFileSelector>
 #include <QQuickView>
+#include "noSleep.h"
 
 int main(int argc, char *argv[])
 {
@@ -67,5 +68,9 @@ int main(int argc, char *argv[])
         return -1;
     view.setResizeMode(QQuickView::SizeRootObjectToView);
     view.show();
+
+#if defined(Q_OS_IOS)
+    noSleep::setTimerDisabled();
+#endif
     return app.exec();
 }
