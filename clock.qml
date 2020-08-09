@@ -59,6 +59,7 @@ Rectangle {
   width: 400; height: 740
   color: countDownTimer.mode == "Work" ? "#05b508" : "#0523b5"
 
+  property bool isPortrait: width < height
   function initializeClock() {
     countDownTimer.seconds = restSeconds.text;
     countDownTimer.workSeconds = workSeconds.text;
@@ -67,134 +68,150 @@ Rectangle {
     countDownTimer.mode = "Rest"
   }
 
-  ColumnLayout {
+  GridLayout {
     id: inputLayout
-    spacing: 10
+    rowSpacing: 10
+    columnSpacing: 10
+    anchors.fill: parent
+    anchors.margins: 10
     Layout.minimumWidth: root.width
     Layout.minimumHeight: root.height
+    flow: isPortrait ? GridLayout.TopToBottom : GridLayout.LeftToRight
 
-    RowLayout {
-      Layout.topMargin: 20
-      Layout.leftMargin: 10
-      Text {
-        text: "Work:"
-        color: "white"
-        font.family: "Helvetica"; font.pixelSize: 40
-      }
+    Rectangle {
+      Layout.minimumWidth: 340
+      Layout.minimumHeight: 200
+      color: "#22222205"
+      RowLayout {
+        id: workRow
+        Text {
+          text: "Work:"
+          color: "white"
+          font.family: "Helvetica"; font.pixelSize: 40
+        }
 
-      TextInput {
-        id: workSeconds
-        text: "45"
-        color: "white"
-        font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
-      }
-
-      Settings {
-        property alias workSeconds: workSeconds.text
-      }
-    }
-
-    RowLayout {
-      Layout.leftMargin: 10
-      Text {
-        text: "Rest:"
-        color: "white"
-        font.family: "Helvetica"; font.pixelSize: 40
-      }
-
-      TextInput {
-        id: restSeconds
-        text: "30"
-        color: "white"
-        font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
-      }
-      Settings {
-        property alias restSeconds: restSeconds.text
-      }
-    }
-
-    RowLayout {
-      Layout.minimumWidth: root.width
-
-      Button {
-        Layout.alignment:Qt.AlignCenter
-        contentItem: Text {
-          text: countDownTimer.timer.running ? "Pause" : "Resume"
+        TextInput {
+          id: workSeconds
+          text: "45"
           color: "white"
           font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
-          horizontalAlignment: Text.AlignHCenter
-          verticalAlignment: Text.AlignVCenter
-        }
-        background: Rectangle {
-          implicitHeight: 60
-          implicitWidth: 180
-          color: "grey"
-          radius: 10
         }
 
-        onClicked: {
-          if (countDownTimer.timer.running)
-            countDownTimer.timer.stop()
-          else
-            countDownTimer.timer.start()
+        Settings {
+          property alias workSeconds: workSeconds.text
         }
       }
+      RowLayout {
+        id: restRow
+        anchors.top: workRow.bottom
+        anchors.topMargin: 10
+        Text {
+          text: "Rest:"
+          color: "white"
+          font.family: "Helvetica"; font.pixelSize: 40
+        }
 
-      Button {
-        Layout.alignment:Qt.AlignCenter
-        contentItem: Text {
-          text: countDownTimer.timer.running ? "Stop" : "Start"
+        TextInput {
+          id: restSeconds
+          text: "30"
           color: "white"
           font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
-          horizontalAlignment: Text.AlignHCenter
-          verticalAlignment: Text.AlignVCenter
         }
-        background: Rectangle {
-          implicitHeight: 60
-          implicitWidth: 180
-          color: "grey"
-          radius: 10
+        Settings {
+          property alias restSeconds: restSeconds.text
+        }
+      }
+      RowLayout {
+        id: buttonRow
+        anchors.top: restRow.bottom
+        anchors.topMargin: 20
+
+        Button {
+          Layout.alignment:Qt.AlignCenter
+
+          contentItem: Text {
+            text: countDownTimer.timer.running ? "Pause" : "Resume"
+            color: "white"
+            font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+          }
+          background: Rectangle {
+            implicitHeight: 60
+            implicitWidth: 180
+            color: "grey"
+            radius: 10
+          }
+
+          onClicked: {
+            if (countDownTimer.timer.running)
+              countDownTimer.timer.stop()
+            else
+              countDownTimer.timer.start()
+          }
         }
 
-        onClicked: {
-          if (countDownTimer.timer.running) {
-            countDownTimer.timer.stop()
-          } else {
-            countDownTimer.timer.start()
-            initializeClock();
+        Button {
+          Layout.alignment:Qt.AlignCenter
+
+          contentItem: Text {
+            text: countDownTimer.timer.running ? "Stop" : "Start"
+            color: "white"
+            font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+          }
+          background: Rectangle {
+            implicitHeight: 60
+            implicitWidth: 180
+            color: "grey"
+            radius: 10
+          }
+
+          onClicked: {
+            if (countDownTimer.timer.running) {
+              countDownTimer.timer.stop()
+            } else {
+              countDownTimer.timer.start()
+              initializeClock();
+            }
           }
         }
       }
-    }
 
-    RowLayout {
-      id: setRow
-      Layout.leftMargin: 10
-      Text {
-        text: "Set:"
-        color: "white"
-        font.family: "Helvetica"; font.pixelSize: 20
+      RowLayout {
+        id: setRow
+        anchors.top: buttonRow.bottom
+        anchors.topMargin: 30
+        Text {
+          text: "Set:"
+          color: "white"
+          font.family: "Helvetica"; font.pixelSize: 20
+        }
+
+        Text {
+          text: countDownTimer.sets
+          color: "white"
+          font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
+        }
       }
 
-      Text {
-        text: countDownTimer.sets
-        color: "white"
-        font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
-      }
     }
 
-    Content.CountDownTimer {
-      id: countDownTimer
-      property int insetMargin: -60
-      Layout.leftMargin: root.width/2 - countDownTimer.dial.height/2
-      Layout.topMargin: insetMargin
-      implicitHeight: countDownTimer.dial.height
-      implicitWidth: implicitHeight
-
+    Rectangle {
+      color: "#22222205"
+      Layout.minimumWidth: 400
+      Layout.minimumHeight: 340
+      Content.CountDownTimer {
+        id: countDownTimer
+        anchors.centerIn: parent
+        implicitHeight: 400
+        implicitWidth: implicitHeight
+      }
       Text {
-        anchors.top: countDownTimer.bottom
-        anchors.topMargin: countDownTimer.insetMargin
+        anchors.bottom: countDownTimer.bottom
         anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottomMargin: 50
         text: countDownTimer.mode
         width: 100
         color: "white"

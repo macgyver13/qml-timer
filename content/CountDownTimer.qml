@@ -54,8 +54,6 @@ import QtQuick.Layouts 1.15
 
 Item {
   id : clock
-  width: 300
-  height: 240
 
   MediaPlayer {
     id: playDing
