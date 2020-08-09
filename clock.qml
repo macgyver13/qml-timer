@@ -78,10 +78,10 @@ Rectangle {
     Layout.minimumHeight: root.height
     flow: isPortrait ? GridLayout.TopToBottom : GridLayout.LeftToRight
 
-    Rectangle {
+    Item {
       Layout.minimumWidth: 340
       Layout.minimumHeight: 200
-      color: "#22222205"
+//      color: "#22222205"
       RowLayout {
         id: workRow
         Text {
@@ -198,8 +198,8 @@ Rectangle {
 
     }
 
-    Rectangle {
-      color: "#22222205"
+    Item {
+//      color: "#22222205"
       Layout.minimumWidth: 400
       Layout.minimumHeight: 340
       Content.CountDownTimer {
