@@ -110,7 +110,7 @@ Item {
 
   Knob {
     id: dial
-    height: 400
+    height: 360
   }
 
 }

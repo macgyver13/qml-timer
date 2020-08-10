@@ -56,7 +56,7 @@ import Qt.labs.settings 1.0
 
 Rectangle {
   id: root
-  width: 400; height: 740
+  width: 360; height: 864
   color: countDownTimer.mode == "Work" ? "#05b508" : "#0523b5"
 
   property bool isPortrait: width < height
@@ -132,13 +132,13 @@ Rectangle {
           contentItem: Text {
             text: countDownTimer.timer.running ? "Pause" : "Resume"
             color: "white"
-            font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
+            font.family: "Helvetica"; font.bold: true; font.pixelSize: 36
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
           }
           background: Rectangle {
             implicitHeight: 60
-            implicitWidth: 180
+            implicitWidth: 170
             color: "grey"
             radius: 10
           }
@@ -157,13 +157,13 @@ Rectangle {
           contentItem: Text {
             text: countDownTimer.timer.running ? "Stop" : "Start"
             color: "white"
-            font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
+            font.family: "Helvetica"; font.bold: true; font.pixelSize: 36
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
           }
           background: Rectangle {
             implicitHeight: 60
-            implicitWidth: 180
+            implicitWidth: 170
             color: "grey"
             radius: 10
           }
@@ -200,12 +200,12 @@ Rectangle {
 
     Item {
 //      color: "#22222205"
-      Layout.minimumWidth: 400
+      Layout.minimumWidth: 360
       Layout.minimumHeight: 340
       Content.CountDownTimer {
         id: countDownTimer
         anchors.centerIn: parent
-        implicitHeight: 400
+        implicitHeight: 360
         implicitWidth: implicitHeight
       }
       Text {
