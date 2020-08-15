@@ -72,6 +72,8 @@ Item {
   property string mode: "Rest"
   property alias timer: countDownTimer
   property alias dial: dial
+  property int workOutSeconds: 0
+  property string workOutTime: ""
 
   function timeChanged() {
     seconds = seconds - 1;
@@ -80,6 +82,14 @@ Item {
       percentComplete = seconds / workSeconds;
     } else {
       percentComplete = seconds / restSeconds;
+    }
+    workOutSeconds = workOutSeconds + 1;
+    if (workOutSeconds < 60){
+      workOutTime = workOutSeconds;
+    } else {
+      var workOutMinutes = Math.floor(workOutSeconds / 60);
+      var tempSeconds = (workOutSeconds % 60);
+      workOutTime = workOutMinutes + ":" + (tempSeconds < 10 ? "0" + tempSeconds: tempSeconds);
     }
     dial.update(percentComplete,seconds);
     if (seconds == 0) {

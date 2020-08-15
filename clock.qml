@@ -61,10 +61,11 @@ Rectangle {
 
   property bool isPortrait: width < height
   function initializeClock() {
-    countDownTimer.seconds = restSeconds.text;
-    countDownTimer.workSeconds = workSeconds.text;
-    countDownTimer.restSeconds = restSeconds.text;
+    countDownTimer.seconds = restSeconds.text
+    countDownTimer.workSeconds = workSeconds.text
+    countDownTimer.restSeconds = restSeconds.text
     countDownTimer.sets = 0
+    countDownTimer.workOutSeconds = 0
     countDownTimer.mode = "Rest"
   }
 
@@ -81,7 +82,6 @@ Rectangle {
     Item {
       Layout.minimumWidth: 340
       Layout.minimumHeight: 200
-//      color: "#22222205"
       RowLayout {
         id: workRow
         Text {
@@ -179,29 +179,47 @@ Rectangle {
         }
       }
 
-      RowLayout {
+      Item {
         id: setRow
-        anchors.top: buttonRow.bottom
-        anchors.topMargin: 30
+        anchors {top: buttonRow.bottom; topMargin: 30}
+        width:parent.width
         Text {
+          id: setLabel
+          anchors {top: setRow.top; topMargin: 10}
           text: "Set:"
           color: "white"
           font.family: "Helvetica"; font.pixelSize: 20
         }
 
         Text {
+          id: setValue
+          anchors {left: setLabel.right; leftMargin: 5; top: setRow.top}
           text: countDownTimer.sets
           color: "white"
           font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
         }
-      }
 
+        Text {
+          id: currentTime
+          text: Qt.formatTime(new Date(),"hh:mm:ss")
+          anchors.right: setRow.right
+          color: "white"
+          font.family: "Helvetica"; font.pixelSize: 36
+        }
+      }
     }
 
     Item {
-//      color: "#22222205"
       Layout.minimumWidth: 360
       Layout.minimumHeight: 340
+      Text {
+        anchors {top: countDownTimer.top; horizontalCenter: parent.horizontalCenter; topMargin: 75}
+        text: countDownTimer.workOutTime
+        horizontalAlignment: Text.AlignHCenter
+        width: 100
+        color: "white"
+        font.family: "Helvetica"; font.pixelSize: 36
+      }
       Content.CountDownTimer {
         id: countDownTimer
         anchors.centerIn: parent
@@ -209,14 +227,19 @@ Rectangle {
         implicitWidth: implicitHeight
       }
       Text {
-        anchors.bottom: countDownTimer.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.bottomMargin: 50
+        anchors {bottom: countDownTimer.bottom; horizontalCenter: parent.horizontalCenter; bottomMargin: 50}
         text: countDownTimer.mode
+        horizontalAlignment: Text.AlignHCenter
         width: 100
         color: "white"
         font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
       }
     }
+  }
+
+  Timer {
+    id: currentTimer
+    interval: 1000; running: true; repeat: true;
+    onTriggered: currentTime.text = Qt.formatTime(new Date(),"hh:mm:ss");
   }
 }
