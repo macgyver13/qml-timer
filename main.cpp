@@ -53,6 +53,7 @@
 #include <QQmlFileSelector>
 #include <QQuickView>
 #include "noSleep.h"
+#include "AppDelegate-C-Interface.h"
 
 int main(int argc, char *argv[])
 {
@@ -72,6 +73,7 @@ int main(int argc, char *argv[])
     view.show();
 
 #if defined(Q_OS_IOS)
+    InitializeDelegate();
     noSleep::setTimerDisabled();
 #endif
     return app.exec();

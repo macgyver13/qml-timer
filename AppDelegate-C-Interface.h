@@ -1,0 +1,6 @@
+#ifndef APPDELEGATECINTERFACE_H
+#define APPDELEGATECINTERFACE_H
+
+void InitializeDelegate();
+
+#endif // APPDELEGATECINTERFACE_H
