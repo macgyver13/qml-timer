@@ -53,6 +53,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import "content" as Content
 import Qt.labs.settings 1.0
+import AppState 1.0
 
 Rectangle {
   id: root
@@ -144,10 +145,13 @@ Rectangle {
           }
 
           onClicked: {
-            if (countDownTimer.timer.running)
+            if (countDownTimer.timer.running) {
               countDownTimer.timer.stop()
-            else
+              AppState.isActive = false
+            } else {
               countDownTimer.timer.start()
+              AppState.isActive = true
+            }
           }
         }
 
@@ -171,9 +175,11 @@ Rectangle {
           onClicked: {
             if (countDownTimer.timer.running) {
               countDownTimer.timer.stop()
+              AppState.isActive = false
             } else {
               countDownTimer.timer.start()
-              initializeClock();
+              AppState.isActive = true
+              initializeClock()
             }
           }
         }
@@ -239,7 +245,7 @@ Rectangle {
 
   Timer {
     id: currentTimer
-    interval: 1000; running: true; repeat: true;
+    interval: 1000; running: countDownTimer.isActive; repeat: true;
     onTriggered: currentTime.text = Qt.formatTime(new Date(),"hh:mm:ss");
   }
 }

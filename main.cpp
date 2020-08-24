@@ -53,6 +53,7 @@
 #include <QQmlFileSelector>
 #include <QQuickView>
 #include "noSleep.h"
+#include "Entry.h"
 #include "AppDelegate-C-Interface.h"
 
 int main(int argc, char *argv[])
@@ -63,6 +64,8 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName("Clock");
 
     QGuiApplication app(argc, argv);
+
+    Entry::registerQmlTypes();
 
     QQuickView view;
     view.connect(view.engine(), &QQmlEngine::quit, &app, &QCoreApplication::quit);

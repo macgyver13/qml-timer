@@ -2,7 +2,9 @@ TEMPLATE     = app
 
 QT          += qml quick multimedia
 
-SOURCES     += main.cpp
+SOURCES     += main.cpp \
+  AppState.cpp \
+  Entry.cpp
 
 ICON = clock.icns
 
@@ -39,6 +41,8 @@ DISTFILES += \
 HEADERS += \
   AppDelegate-C-Interface.h \
   AppDelegate.h \
+  AppState.h \
+  Entry.h \
   noSleep.h
 
 

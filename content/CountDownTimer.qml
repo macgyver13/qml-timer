@@ -74,24 +74,18 @@ Item {
   property alias dial: dial
   property int workOutSeconds: 0
   property string workOutTime: ""
+  property bool isActive: false
+
+  Connections {
+    target: Qt.application
+    onStateChanged: {
+      isActive = (Qt.application.state === Qt.ApplicationActive);
+    }
+  }
 
   function timeChanged() {
     seconds = seconds - 1;
-    var percentComplete = 0;
-    if (mode === "Work") {
-      percentComplete = seconds / workSeconds;
-    } else {
-      percentComplete = seconds / restSeconds;
-    }
     workOutSeconds = workOutSeconds + 1;
-    if (workOutSeconds < 60){
-      workOutTime = workOutSeconds;
-    } else {
-      var workOutMinutes = Math.floor(workOutSeconds / 60);
-      var tempSeconds = (workOutSeconds % 60);
-      workOutTime = workOutMinutes + ":" + (tempSeconds < 10 ? "0" + tempSeconds: tempSeconds);
-    }
-    dial.update(percentComplete,seconds);
     if (seconds == 0) {
       playDing.play()
       if (mode === "Work") {
@@ -110,6 +104,23 @@ Item {
           playShort.play()
       }
     }
+    if (!isActive)
+      return;
+    var percentComplete = 0;
+    if (mode === "Work") {
+      percentComplete = seconds / workSeconds;
+    } else {
+      percentComplete = seconds / restSeconds;
+    }
+    if (workOutSeconds < 60){
+      workOutTime = workOutSeconds;
+    } else {
+      var workOutMinutes = Math.floor(workOutSeconds / 60);
+      var tempSeconds = (workOutSeconds % 60);
+      workOutTime = workOutMinutes + ":" + (tempSeconds < 10 ? "0" + tempSeconds: tempSeconds);
+    }
+    dial.update(percentComplete,seconds);
+
   }
 
   Timer {
