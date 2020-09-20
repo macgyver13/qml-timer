@@ -26,7 +26,7 @@
     [_player prepareToPlay];
     _player.numberOfLoops = -1;
     AVAudioSession *session = [AVAudioSession sharedInstance];
-    [session setCategory:AVAudioSessionCategoryPlayback withOptions:(AVAudioSessionCategoryOptionAllowAirPlay + AVAudioSessionCategoryOptionInterruptSpokenAudioAndMixWithOthers) error:nil];
+    [session setCategory:AVAudioSessionCategoryPlayback withOptions:(AVAudioSessionCategoryOptionAllowAirPlay + AVAudioSessionCategoryOptionMixWithOthers) error:nil];
     [session setActive:YES error:nil];
   }
   return _player;

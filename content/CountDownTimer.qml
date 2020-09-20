@@ -75,6 +75,7 @@ Item {
   property int workOutSeconds: 0
   property string workOutTime: ""
   property bool isActive: false
+  property bool playAudio: false
 
   Connections {
     target: Qt.application
@@ -87,7 +88,8 @@ Item {
     seconds = seconds - 1;
     workOutSeconds = workOutSeconds + 1;
     if (seconds == 0) {
-      playDing.play()
+      if (playAudio)
+        playDing.play()
       if (mode === "Work") {
         mode = "Rest"
         seconds = restSeconds
@@ -97,11 +99,14 @@ Item {
         seconds = workSeconds
       }
     } else if (seconds == 3) {
-      playShort.play()
+      if (playAudio)
+        playShort.play()
     } else {
       if ( mode === "Work") {
-        if ( (workSeconds > 29 && Math.round(workSeconds * .5) == seconds) || seconds == 10 )
-          playShort.play()
+        if ( (workSeconds > 29 && Math.round(workSeconds * .5) == seconds) || seconds == 10 ) {
+          if (playAudio)
+            playShort.play()
+        }
       }
     }
     if (!isActive)

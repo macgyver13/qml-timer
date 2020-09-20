@@ -49,7 +49,7 @@
 ****************************************************************************/
 
 import QtQuick 2.0
-import QtQuick.Controls 2.15
+import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.15
 import "content" as Content
 import Qt.labs.settings 1.0
@@ -88,7 +88,7 @@ Rectangle {
         Text {
           text: "Work:"
           color: "white"
-          font.family: "Helvetica"; font.pixelSize: 40
+          font.family: "Helvetica"; font.pixelSize: 30
         }
 
         TextInput {
@@ -98,8 +98,23 @@ Rectangle {
           font.family: "Helvetica"; font.bold: true; font.pixelSize: 40
         }
 
+        Text {
+          text: "   Audio:"
+          color: "white"
+          font.family: "Helvetica"; font.pixelSize: 30
+        }
+
+        Switch {
+          id: audioEnabled
+          checked: false
+          onCheckedChanged: {
+            countDownTimer.playAudio = checked
+          }
+        }
+
         Settings {
           property alias workSeconds: workSeconds.text
+          property alias audioEnabled: audioEnabled.checked
         }
       }
       RowLayout {
@@ -109,7 +124,7 @@ Rectangle {
         Text {
           text: "Rest:"
           color: "white"
-          font.family: "Helvetica"; font.pixelSize: 40
+          font.family: "Helvetica"; font.pixelSize: 30
         }
 
         TextInput {
