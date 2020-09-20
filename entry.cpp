@@ -14,6 +14,4 @@ void Entry::registerQmlTypes()
     Q_UNUSED(scriptEngine)
     return AppState().shared().get();
   });
-//    QQmlEngine::setObjectOwnership(SchedulingClientController().shared().get(), QQmlEngine::CppOwnership);
-
 }

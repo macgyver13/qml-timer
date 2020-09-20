@@ -19,6 +19,7 @@
   return shared;
 }
 
+//Start a player with no sound to allow QML media player to work when backgrounded, stopped when app is not backgrounded
 - (AVAudioPlayer *)player{
   if (!_player){
     NSURL *url=[[NSBundle mainBundle]URLForResource:@"silence.mp3" withExtension:nil];
@@ -42,16 +43,19 @@ void InitializeDelegate ()
   [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
   return YES;
 }
+
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
   [self beingBackgroundUpdateTask];
 }
+
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
   [self endBackgroundUpdateTask];
 }
 
 - (void)beingBackgroundUpdateTask {
+  //Don't start background audio if timer is not active
   if (AppState().shared().get()->isActive()) {
     [self.player play];
   }
@@ -59,6 +63,7 @@ void InitializeDelegate ()
       [self endBackgroundUpdateTask];
   }];
 }
+
 - (void)endBackgroundUpdateTask {
   [self.player stop];
   [[UIApplication sharedApplication] endBackgroundTask: self.backgroundUpdateTask];

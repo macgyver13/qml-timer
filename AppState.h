@@ -1,6 +1,8 @@
 #ifndef APPSTATE_H
 #define APPSTATE_H
 
+/* Singleton for use by c++ and QML for determining if the timer is running */
+
 #include <QObject>
 #include <QSharedPointer>
 
