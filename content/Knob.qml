@@ -1,3 +1,7 @@
+/****************************************************************************
+Original work from: https://github.com/IndeemaSoftware/EEIoT/blob/master/EEIoT/Knob.qml
+*****************************************************************************/
+
 import QtQuick 2.0
 
 //all the automatic meagurements are made from height of Item
